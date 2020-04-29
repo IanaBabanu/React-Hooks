@@ -1,0 +1,14 @@
+.edit-input {
+  background-color: transparent;
+  color: #ffffff;
+  border: 1px solid #03f8fc;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  outline: none;
+}
+
+.edit-input:focus {
+  outline-style: none;
+  outline-width: 0;
+}
