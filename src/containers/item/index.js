@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef } from "react";
-import { ToDoContext } from "../app/context";
+import { ToDoListContext } from "../app/listItemsProvider";
 import DeleteBtn from "../../components/deleteBtn/index";
 import EditBtn from "../../components/editBtn/index";
 import "./index.sass";
@@ -7,7 +7,7 @@ import InputEdit from "../editInput";
 
 const Item = ({ task }) => {
   const [enableEdit, setEnableEdit] = useState(false);
-  const { dispatch } = useContext(ToDoContext);
+  const { dispatch } = useContext(ToDoListContext);
 
   const setEdit = () => {
     setEnableEdit(true);
@@ -24,7 +24,9 @@ const Item = ({ task }) => {
         <EditBtn enableEdit={enableEdit} edit={setEdit} />
       </div>
 
-      <DeleteBtn delete={() => dispatch({type: 'deleteFromList', payload: task.id})} />
+      <DeleteBtn
+        delete={() => dispatch({ type: "deleteFromList", payload: task.id })}
+      />
     </li>
   );
 };

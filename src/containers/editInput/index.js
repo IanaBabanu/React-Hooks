@@ -1,12 +1,12 @@
 import React, { useContext, useState, useRef } from "react";
-import { ToDoContext } from "../app/context";
-import  useFocus  from "../../hooks/useFocus";
+import { ToDoListContext } from "../app/listItemsProvider";
+import useFocus from "../../hooks/useFocus";
 import "./index.sass";
 
 const InputEdit = ({ task, setEnableEdit }) => {
-  const [newValue, setNewValue] = useState("");
-  const inputRef  = useFocus();
-  const { dispatch } = useContext(ToDoContext);
+  const [newValue, setNewValue] = useState(() => task.text);
+  const inputRef = useFocus();
+  const { dispatch } = useContext(ToDoListContext);
 
   const onChange = ({ target: { value } }) => {
     setNewValue(value);
@@ -16,7 +16,7 @@ const InputEdit = ({ task, setEnableEdit }) => {
     e.preventDefault();
 
     if (newValue) {
-      dispatch({type: 'editFromList', payload: {id: task.id, newValue }});
+      dispatch({ type: "editFromList", payload: { id: task.id, newValue } });
     }
     setEnableEdit(false);
   };

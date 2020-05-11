@@ -1,35 +1,33 @@
-import React, { useReducer } from "react";
-import { ToDoContext } from "./context";
+import React, { useReducer, createContext } from "react";
 
-const reducer = ( state, action ) => {
+export const ToDoListContext = createContext({});
+
+const reducer = (state, action) => {
   switch (action.type) {
-    case 'addToList': 
+    case "addToList":
       return addToList(state, action.payload);
-    case 'deleteFromList':
+    case "deleteFromList":
       return deleteFromList(state, action.payload);
-    case 'editFromList':
+    case "editFromList":
       return editFromList(state, action.payload);
     default:
-      throw new Error('Unexpected action'); 
+      return state;
   }
-}
+};
 
 const addToList = (state, inputVal) => {
-  return ([...state, { id: Date.now(), text: inputVal }]);
+  return [...state, { id: Date.now(), text: inputVal }];
 };
 
 const deleteFromList = (state, id) => {
-  return (state.filter((task) => task.id !== id));
+  return state.filter((task) => task.id !== id);
 };
 
 const editFromList = (state, { id, newValue }) => {
-   return (
-    state.map((task) => {
-      return task.id === id ? { id, text: newValue } : task;
-    })
-  );
+  return state.map((task) => {
+    return task.id === id ? { id, text: newValue } : task;
+  });
 };
-
 
 const ListItemProvider = ({ children }) => {
   const [valuesArray, dispatch] = useReducer(reducer, []);
@@ -37,7 +35,9 @@ const ListItemProvider = ({ children }) => {
   const contextValue = { valuesArray, dispatch };
 
   return (
-    <ToDoContext.Provider value={contextValue}>{children}</ToDoContext.Provider>
+    <ToDoListContext.Provider value={contextValue}>
+      {children}
+    </ToDoListContext.Provider>
   );
 };
 

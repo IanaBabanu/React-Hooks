@@ -9,7 +9,7 @@ const App = () => {
   return (
     <div className="app">
       <div className="wrapper">
-        <Title >Todo App</Title>
+        <Title>Todo App</Title>
         <ListItemProvider>
           <Input />
           <ToDoList />

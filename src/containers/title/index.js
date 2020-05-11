@@ -1,26 +1,27 @@
-import React, { useState, useMemo} from "react";
+import React, { useState, useMemo } from "react";
 import "./index.sass";
 
-const colors = ['#f55d42', '#f5dd42', '#f5429e', '#42f569', '#03f8fc' ];
+const colors = ["#f55d42", "#f5dd42", "#f5429e", "#42f569", "#03f8fc"];
 
 const Title = () => {
-    const [color, setColor] = useState(colors[0]);
-    
-    const style = useMemo(() => {
-        return { color };
-    }, [color])
+  const [color, setColor] = useState(colors[0]);
 
-    const handleHover = () => {
-        const rand =  Math.random() * (4 + 1);
-        const index = Math.floor(rand);
-        setColor(colors[index]);
-    }
+  const style = useMemo(() => {
+    return { color };
+  }, [color]);
 
-    console.log('render');
+  const handleHover = () => {
+    const rand = Math.random() * colors.length;
+    const index = Math.floor(rand);
+    setColor(colors[index]);
+  };
+
+  console.log("render");
 
   return (
-    <h1 className="title" style={style} onMouseOver={handleHover}>Todo App</h1>
-
+    <h1 className="title" style={style} onMouseOver={handleHover}>
+      Todo App
+    </h1>
   );
 };
 

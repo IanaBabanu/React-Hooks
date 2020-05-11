@@ -7,8 +7,7 @@ const useFocus = () => {
     inputRef.current.focus();
   }, []);
 
-  return inputRef ;
-  
+  return inputRef;
 };
 
 export default useFocus;

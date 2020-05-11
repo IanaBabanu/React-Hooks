@@ -1,12 +1,12 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
-import { ToDoContext } from "../app/context";
-import  useFocus  from "../../hooks/useFocus";
+import { ToDoListContext } from "../app/listItemsProvider";
+import useFocus from "../../hooks/useFocus";
 import "./index.sass";
 
 const Input = () => {
   const [value, setValue] = useState("");
-  const { dispatch } = useContext(ToDoContext);
-  const inputRef  = useFocus();
+  const { dispatch } = useContext(ToDoListContext);
+  const inputRef = useFocus();
 
   const onChange = ({ target: { value } }) => {
     setValue(value);
@@ -15,7 +15,7 @@ const Input = () => {
   const handleClick = (e) => {
     e.preventDefault();
     if (value) {
-      dispatch({type: 'addToList', payload: value});
+      dispatch({ type: "addToList", payload: value });
     }
     setValue("");
   };
@@ -31,7 +31,7 @@ const Input = () => {
           onChange={onChange}
           value={value}
           ref={inputRef}
-          />
+        />
       </form>
     </div>
   );
